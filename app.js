@@ -1,11 +1,11 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
-import { getFirestore, collection, addDocs } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
-const name = document.getElementById('name').value;
-const age = document.getElementById('number').value;
+const name = document.getElementById("name");
+const age = document.getElementById("number");
 
 
 // Your web app's Firebase configuration
@@ -22,13 +22,15 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-try {
-    const docRef = await addDoc(collection(db, "students"), {
-      name: name,
-      age: age,
-    });
-    console.log("Document written with ID: ", docRef.id);
-  } catch (e) {
-    console.error("Error adding document: ", e);
-  }
+document.getElementById("submit").onclick = async() => {
+    try {
+        const docRef = await addDoc(collection(db, "students"), {
+          name: name.value,
+          age: age.value,
+        });
+        console.log("Document written with ID: ", docRef.id);
+      } catch (e) {
+        console.error("Error adding document: ", e);
+      }
+}
   
